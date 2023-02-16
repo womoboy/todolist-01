@@ -5,7 +5,7 @@ There is nothing special to do for run this project, just find `./src` folder an
 
 ## Some features
 - CRUD system(create, read, update, delete)
-- Dynamic date with array
+- Dynamic data with array
 - Data saving in local storage
 - Fast and minimal
 - And of course sorting (^̮^)
