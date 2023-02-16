@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo App</title>
+
+  <link rel="stylesheet" href="./assets/style/general.css" />
+  <link rel="stylesheet" href="./assets//style/main.css" />
+</head>
+
+<body>
+  <section>
+    <div class="container">
+      <form onsubmit="submitHandle(event)">
+        <h3>What you want to do?</h3>
+        <div>
+          <input id="title" name="title" type="text" placeholder="Enter Task" />
+          <button type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="sec-02">
+    <div class="container">
+      <h3 class="header-text">Task List</h3>
+      <ul id="task-list" class="task-list"></ul>
+    </div>
+  </section>
+
+  <section class="modal-section">
+    <div class="container">
+      <form id="update-form" onsubimit="updateHandle">
+        <input type="text" name="">
+        <button type="submit">Update</button>
+      </form>
+    </div>
+  </section>
+
+  <script src="./assets/script/main.js"></script>
+</body>
+
+</html>
