@@ -137,5 +137,5 @@ function overwrite(eve) {
   })
 
   createTasks(tasks);
-  eve.target.parentElement.parentElement.style.display = 'none'; // dom navigate again :)
+  eve.target.parentElement.parentElement.style.display = 'none'; // i use again the dom navigate :)
 }
