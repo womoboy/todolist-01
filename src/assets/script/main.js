@@ -94,7 +94,6 @@ function submitHandle(e) {
 
 //when task done
 async function handleDone(id) {
-    let newArray = [];
     for(let i = 0; i < tasks.length; i++){
         if(tasks[i].id === id) {
             if(tasks[i].done) {
@@ -130,5 +129,13 @@ function handleDelete(id) {
 function overwrite(eve) {
   eve.preventDefault();
   let updateInput = document.getElementsByClassName('update-input')[0];
-  console.log(updateInput.value)
+
+  tasks.map((item) => {
+    if(item.id === currId){
+      item.title = updateInput.value;
+    }
+  })
+
+  createTasks(tasks);
+  eve.target.parentElement.parentElement.style.display = 'none'; // dom navigate again :)
 }
