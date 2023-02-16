@@ -1,3 +1,4 @@
+let currId = '';
 var tasks = [],
   taskListELe = document.getElementById("task-list"),
   massageBox = {
@@ -28,7 +29,7 @@ function createTasks(arr) {
           </div>
           <div class="btn-frame">
               <button class="green" onclick="handleDone('${item.id}')">Done</button>
-              <button class="gray onclick="handleUpdate('${item.id}')"">Edit</button>
+              <button class="gray" onclick="handleUpdate('${item.id}')">Edit</button>
               <button class="red" onclick="handleDelete('${item.id}')">Delete</button>
           </div>
         </li>`;
@@ -106,13 +107,16 @@ async function handleDone(id) {
     createTasks(tasks)
 }
 
-//update task
-function handleUpdate(eve, currentId){
-  let getId = eve.target;
-  console.log(getId)
+// update task
+function handleUpdate(id){
+  currId = id;
+  let currTask = tasks.find(item => item.id === currId);
+  let modalSection = document.getElementsByClassName('modal-section');
+  modalSection[0].style.display = 'flex';
+  modalSection[0].firstElementChild.firstElementChild.firstElementChild.value = currTask.title; //i want to try dom navigate :)
 }
 
-//delete task
+// delete task
 function handleDelete(id) {
   const newTasks = tasks.filter((item) => {
     return item.id !== id;
@@ -120,4 +124,11 @@ function handleDelete(id) {
 
   tasks = newTasks;
   createTasks(tasks);
+}
+
+// overwrite
+function overwrite(eve) {
+  eve.preventDefault();
+  let updateInput = document.getElementsByClassName('update-input')[0];
+  console.log(updateInput.value)
 }
