@@ -1,7 +1,7 @@
 # MINIMAL TODOLIST
 
 ## How to run this?
-There is nothing special to do for run this project, just find ./src folder and run index.html file in your browser.
+There is nothing special to do for run this project, just find `./src` folder and run `index.html` file in your browser.
 
 ## Some features
 - There is CRUD system(create, read, update, delete)
