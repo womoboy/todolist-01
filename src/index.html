@@ -27,6 +27,17 @@
   <section id="sec-02">
     <div class="container">
       <h3 class="header-text">Task List</h3>
+      <div class="sort-frame">
+        <lable for="task-sorting">Sorting by:</lable>
+        <select name="task-sorting" id="task-sorting" onchange="getSort(event)">
+          <option value="A-Z">A-Z</option>
+          <option value="Z-A">Z-A</option>
+          <option value="newest">Newest</option>
+          <option value="lastest">Lastest</option>
+          <option value="finished">Finished</option>
+          <option value="not-finished">Non-finished</option>
+        </select>
+      </div>
       <ul id="task-list" class="task-list"></ul>
     </div>
   </section>

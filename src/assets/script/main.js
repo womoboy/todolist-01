@@ -1,6 +1,5 @@
 let currId = '';
 let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
-console.log(tasks)
 var taskListEle = document.getElementById('task-list');
 let massageBox = {
   emptyList: "This list is empty",
@@ -15,18 +14,94 @@ window.onload = () => {
   }
 };
 
+function sortArr(arr, opt) {
+  const myOpt = String(opt);
+  if (myOpt === "A-Z") {
+    arr.sort(function(a, b) {
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  } else if (myOpt === "Z-A") {
+    arr.sort(function(a, b) {
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return -1;
+      } else if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+  } else if (myOpt === "newest") {
+    arr.sort(function(a, b) {
+      if (a.date > b.date) {
+        return 1;
+      } else if (a.date < b.date) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  } else if (myOpt === "lastest") {
+    arr.sort(function(a, b) {
+      if (a.date > b.date) {
+        return -1;
+      } else if (a.date < b.date) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+  } else if (myOpt === "finished") {
+    arr.sort(function(a, b) {
+      if (a.done > b.done) {
+        return -1;
+      } else if (a.done < b.done) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+  } else if (myOpt === "not-finished") {
+    arr.sort(function(a, b) {
+      if (a.done > b.done) {
+        return 1;
+      } else if (a.done < b.done) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  }
+}
+
+function getSort(e) {
+  const getValue = e.target.value;
+  sortArr(tasks, getValue);
+  createTasks(tasks);
+}
+
 //this function make task elements from data
 function createTasks(arr) {
   clearElement(taskListEle);
   Array.prototype.map.call(arr, (item) => {
     const itemId = `${item.id}`;
-    const task = 
+    const task =
       `<li class="task ${item.done === true ? "disable" : ""}">
-          <div class="title">
-             <span>-</span>
-              <span>
-                  <span class="todo-title">${item.title}</span>
-              </span>
+          <div class="content">
+            <div class="info">
+              <span>-</span>
+              <span class="task-title">${item.title}</span>
+            </div>
+            <div class="extra-info">
+              <span>created: </span>
+              <span class="task-date">${item.date}</span>
+              <span class="task-time">${item.time}</span>
+            </div>
           </div>
           <div class="btn-frame">
               <button class="green" onclick="handleDone('${item.id}')">Done</button>
@@ -57,8 +132,8 @@ function getTime() {
 }
 
 //create id
-const getId = function () {
-  return "xxxx-xxxx-4xxx-yxxx-xxxx".replace(/[xy]/g, function (c) {
+const getId = function() {
+  return "xxxx-xxxx-4xxx-yxxx-xxxx".replace(/[xy]/g, function(c) {
     var r = (Math.random() * 16) | 0;
     return r.toString(16);
   });
@@ -80,7 +155,7 @@ function createObj(id, title, date, time, done) {
 //when form submited
 function submitTask(e) {
   e.preventDefault();
-    
+
   let id = getId(),
     time = getTime(),
     date = getDate(),
@@ -96,21 +171,21 @@ function submitTask(e) {
 
 //when task done
 async function handleDone(id) {
-    for(let i = 0; i < tasks.length; i++){
-        if(tasks[i].id === id) {
-            if(tasks[i].done) {
-                tasks[i].done = false
-            } else {
-                tasks[i].done = true
-            }
-        }
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) {
+      if (tasks[i].done) {
+        tasks[i].done = false
+      } else {
+        tasks[i].done = true
+      }
     }
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    createTasks(tasks)
+  }
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  createTasks(tasks)
 }
 
 // update task
-function handleUpdate(id){
+function handleUpdate(id) {
   currId = id;
   let currTask = tasks.find(item => item.id === currId);
   let modalSection = document.getElementsByClassName('modal-section');
@@ -135,7 +210,7 @@ function overwrite(eve) {
   let updateInput = document.getElementsByClassName('update-input')[0];
 
   tasks.map((item) => {
-    if(item.id === currId){
+    if (item.id === currId) {
       item.title = updateInput.value;
     }
   })
