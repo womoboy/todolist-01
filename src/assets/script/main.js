@@ -1,14 +1,15 @@
 let currId = '';
-var tasks = [],
-  taskListELe = document.getElementById("task-list"),
-  massageBox = {
-    emptyList: "This list is empty!",
-  };
+let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [];
+console.log(tasks)
+var taskListEle = document.getElementById('task-list');
+let massageBox = {
+  emptyList: "This list is empty",
+}
 
 //when page loaded, create list of tasks
 window.onload = () => {
   if (tasks.length < 1) {
-    taskListELe.innerHTML = `<p class="empty-massage">${massageBox.emptyList}</p>`;
+    taskListEle.innerHTML = `<p class="empty-massage">${massageBox.emptyList}</p>`;
   } else {
     createTasks(tasks);
   }
@@ -16,7 +17,7 @@ window.onload = () => {
 
 //this function make task elements from data
 function createTasks(arr) {
-  clearElement(taskListELe);
+  clearElement(taskListEle);
   Array.prototype.map.call(arr, (item) => {
     const itemId = `${item.id}`;
     const task = 
@@ -34,7 +35,7 @@ function createTasks(arr) {
           </div>
         </li>`;
 
-    taskListELe.innerHTML += task;
+    taskListEle.innerHTML += task;
   });
 }
 
@@ -77,7 +78,7 @@ function createObj(id, title, date, time, done) {
 }
 
 //when form submited
-function submitHandle(e) {
+function submitTask(e) {
   e.preventDefault();
     
   let id = getId(),
@@ -88,6 +89,7 @@ function submitHandle(e) {
 
   newObj = createObj(id, title.value, date, time);
   tasks.push(newObj);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
   createTasks(tasks);
   title.value = "";
 }
@@ -103,6 +105,7 @@ async function handleDone(id) {
             }
         }
     }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
     createTasks(tasks)
 }
 
@@ -122,6 +125,7 @@ function handleDelete(id) {
   });
 
   tasks = newTasks;
+  localStorage.setItem('tasks', JSON.stringify(tasks))
   createTasks(tasks);
 }
 
@@ -136,6 +140,7 @@ function overwrite(eve) {
     }
   })
 
+  localStorage.setItem('tasks', JSON.stringify(tasks))
   createTasks(tasks);
   eve.target.parentElement.parentElement.style.display = 'none'; // i use again the dom navigate :)
 }
