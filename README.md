@@ -1,4 +1,5 @@
 # MINIMAL TODOLIST
+![overview of todolist environment]()
 
 ## How to run this?
 There is nothing special to do for run this project, just find `./src` folder and run `index.html` file in your browser.
