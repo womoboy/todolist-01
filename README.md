@@ -1,5 +1,5 @@
 # MINIMAL TODOLIST
-![overview of todolist environment]()
+![overview of todolist environment](https://github.com/womoboy/todolist-01/blob/main/todoAppOverview-min.webp)
 
 ## How to run this?
 There is nothing special to do for run this project, just find `./src` folder and run `index.html` file in your browser.
